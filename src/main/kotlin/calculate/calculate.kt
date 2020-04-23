@@ -23,7 +23,7 @@ fun calculate(nums : MutableMap<Int, Double>, operations : MutableMap<Int, Char 
             else -> a.pow(b)
         }
 
-        numbers[key].checkDoubleOverflow()
+        //numbers[key].checkDoubleOverflow()
         operationList.removeAt(key)
         numbers.removeAt(key + 1)
 

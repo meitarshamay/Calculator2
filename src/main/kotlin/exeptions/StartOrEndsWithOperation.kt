@@ -4,6 +4,6 @@ class StartOrEndsWithOperation  :Exception("Oops.. you can not start with operat
 
 fun String.checkStartWithOperation() {
 
-    if (!(this.first().isDigit()) || !(this.last().isDigit()))
+    if ((this.first() in "+-*/^") || (this.last() in "+-*/^"))
         throw  StartOrEndsWithOperation()
 }

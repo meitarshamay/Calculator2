@@ -89,6 +89,17 @@ class Tests {
 
         Assert.assertEquals("7.0", a[0].toString())
     }
+
+    @Test
+    fun checkCalculate5 (){
+        val string ="1.3+5-7*8+8"
+        val operations = (string.splitToOperations())
+        val nums = string.splitToDoubles()
+        val a = calculate(nums,operations)
+
+        Assert.assertEquals("-41.7", a[0].toString())
+    }
+
     @Test
     fun checkCalculate2 (){
         val string ="1+5+2+6-3*4+6/1+150-150/150-149"
@@ -105,14 +116,14 @@ class Tests {
 
         val a = string.toCalculate()
 
-        Assert.assertEquals(8, a)
+        Assert.assertEquals(8.toString(), a)
     }
     @Test
     fun checkCalculator2 (){
         val string ="5+2+6-3*4+6/1"
         val a = string.toCalculate()
 
-        Assert.assertEquals(7, a)
+        Assert.assertEquals(7.toString(), a)
     }
 
 
@@ -121,12 +132,12 @@ class Tests {
 
         "50+4/0+5".toCalculate()
     }
-
-    @Test(expected = InValidChar::class)
-    fun checkCalculatorInValidCharException(){
-
-        "50+4/0+5t".toCalculate()
-    }
+//
+//    @Test(expected = InValidChar::class)
+//    fun checkCalculatorInValidCharException(){
+//
+//        "50+4/0+5t".toCalculate()
+//    }
     @Test(expected = OverflowException::class)
     fun checkOverflowException1(){
         val a = Double.MAX_VALUE
@@ -137,7 +148,7 @@ class Tests {
     @Test
     fun checkRound(){
         val a = 4.0/6
-        Assert.assertEquals(0.666666, roundSolution(a))
+        Assert.assertEquals(0.666666.toString(), roundSolution(a).toString())
 
     }
 
@@ -148,7 +159,7 @@ class Tests {
 
         val a = string.toCalculate()
 
-        Assert.assertEquals(10.666666, a)
+        Assert.assertEquals(10.666666.toString(), a)
     }
 
     @Test
@@ -157,7 +168,7 @@ class Tests {
 
         val a = string.toCalculate()
 
-        Assert.assertEquals(12.0008, a)
+        Assert.assertEquals(12.0008.toString(), a)
     }
 
     //parameters
@@ -235,6 +246,19 @@ class Tests {
         Assert.assertEquals("1.3+5-7*8+t+8", new)
     }
 
+
+    @Test
+    fun checkCalWithParameters(){
+        val paramsValues : List<Pair<String,String>> = listOf( Pair("tt","1.3"), Pair("X","5"), Pair("Y","7"), Pair("y","8"))
+        val str = "tt+X-Y*y+y"
+        println( str.replaceParams(paramsValues))
+        val new= str.toCalculate(paramsValues)
+        println(str)
+
+      val a =  "1.3+5-7*8+8".toCalculate()
+
+        Assert.assertEquals((1.3+5-7*8+8).toString(), new)
+    }
 
 }
 
