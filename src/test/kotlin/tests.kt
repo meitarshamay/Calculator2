@@ -1,3 +1,5 @@
+import `calculate with parameters`.checkExceptionsParams
+import `calculate with parameters`.replaceParams
 import calculate.calculate
 import calculate.getFirstPriorityOperator
 import calculate.splitToDoubles
@@ -158,9 +160,80 @@ class Tests {
         Assert.assertEquals(12.0008, a)
     }
 
+    //parameters
 
+    @Test(expected = DividedByZeroException::class)
+    fun checkDividedByZeroExceptionParams(){
 
+        "50+4t/0".checkExceptionsParams()
+    }
 
+//    @Test(expected = InValidChar::class)
+//    fun checkInValidCharParams(){
+//
+//        "4+7-T&".checkExceptionsParams()
+//    }
+
+    @Test(expected = StartOrEndsWithOperation::class)
+    fun checkStartOrEndWithOperationParams(){
+
+        "4+7ttt-8*".checkExceptionsParams()
+    }
+
+    @Test(expected = TooManyOperatorsInARow::class)
+    fun checkTooManyOperatorsInARowParams(){
+
+        "4r+7x---6".checkExceptionsParams()
+    }
+
+//    @Test
+//    fun checkFixStringWithParams (){
+//        val string ="5tr+1"
+//
+//        val a = string.fixStringWithParams()
+//
+//        Assert.assertEquals("5*t*r+1", a)
+//    }
+//
+//    @Test
+//    fun checkFixStringWithParams2 (){
+//        val string ="5tr+1x*7X-4y/z"
+//
+//        val a = string.fixStringWithParams()
+//
+//        Assert.assertEquals("5*t*r+1*x*7*X-4*y/z", a)
+//    }
+//
+//    @Test
+//    fun checkFixStringWithParams3 (){
+//        val string ="5tr*d+1x*7X-4y/z+75u-uz/t"
+//
+//        val a = string.fixStringWithParams()
+//
+//        Assert.assertEquals("5*t*r*d+1*x*7*X-4*y/z+75*u-u*z/t", a)
+//    }
+//
+//    @Test(expected = InValidChar::class)
+//    fun checkInValidCharParams2(){
+//
+//        "4+7-T+5.t*2".checkExceptionsParams()
+//    }
+//
+//    @Test
+//    fun checkOrganizePow(){
+//        val a = organizePow("2^3^z^4^2^2^2")
+//        Assert.assertEquals("2^3^z^4^2^2^2", a)
+//    }
+
+    @Test
+    fun convertParams(){
+        val paramsValues : List<Pair<String,String>> = listOf( Pair("tt","1.3"), Pair("X","5"), Pair("Y","7"), Pair("y","8"))
+        val str = "tt+X-Y*y+t+y"
+        val new= str.replaceParams(paramsValues)
+        println(str)
+
+        Assert.assertEquals("1.3+5-7*8+t+8", new)
+    }
 
 
 }
